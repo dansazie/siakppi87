@@ -9,5 +9,8 @@ use App\Models\Santri;
 
 class Detail extends Controller
 {
-    //
+    public function index()
+    {
+        dd('here');
+    }
 }
