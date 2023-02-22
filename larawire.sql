@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Waktu pembuatan: 31 Mar 2022 pada 00.48
--- Versi server: 5.7.33
--- Versi PHP: 8.0.9
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 22 Feb 2023 pada 20.33
+-- Versi server: 10.4.27-MariaDB
+-- Versi PHP: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,22 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `asatidzs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nip` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nik` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nuptk` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `namalengkap` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tmplahir` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nip` varchar(20) NOT NULL,
+  `nik` varchar(20) DEFAULT NULL,
+  `nuptk` varchar(20) DEFAULT NULL,
+  `namalengkap` varchar(100) NOT NULL,
+  `tmplahir` varchar(100) NOT NULL,
   `tgllahir` date NOT NULL,
-  `kelamin` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'L',
-  `alamat` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kelamin` varchar(2) NOT NULL DEFAULT 'L',
+  `alamat` varchar(100) NOT NULL,
   `provinsi_id` bigint(20) UNSIGNED DEFAULT NULL,
   `kabupaten_id` bigint(20) UNSIGNED DEFAULT NULL,
   `kecamatan_id` bigint(20) UNSIGNED DEFAULT NULL,
   `desa_id` bigint(20) UNSIGNED DEFAULT NULL,
   `pendidikan_id` bigint(20) UNSIGNED DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Aktif',
+  `photo` varchar(255) DEFAULT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'Aktif',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -108,7 +108,7 @@ CREATE TABLE `desas` (
   `id` int(11) NOT NULL,
   `namadesa` varchar(255) DEFAULT NULL,
   `kecamatan_id` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data untuk tabel `desas`
@@ -81392,12 +81392,12 @@ INSERT INTO `desas` (`id`, `namadesa`, `kecamatan_id`) VALUES
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -81412,7 +81412,7 @@ CREATE TABLE `jurusans` (
   `status` varchar(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data untuk tabel `jurusans`
@@ -81433,7 +81433,7 @@ CREATE TABLE `kabupatens` (
   `id` int(11) NOT NULL,
   `namakabupaten` varchar(255) DEFAULT NULL,
   `provinsi_id` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data untuk tabel `kabupatens`
@@ -81924,8 +81924,8 @@ INSERT INTO `kabupatens` (`id`, `namakabupaten`, `provinsi_id`) VALUES
 
 CREATE TABLE `keahlians` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `keahlian` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `deskripsi` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keahlian` varchar(100) NOT NULL,
+  `deskripsi` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -81948,7 +81948,7 @@ CREATE TABLE `kecamatans` (
   `id` int(11) NOT NULL,
   `namakecamatan` varchar(255) DEFAULT NULL,
   `kabupaten_id` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data untuk tabel `kecamatans`
@@ -88961,10 +88961,10 @@ INSERT INTO `kecamatans` (`id`, `namakecamatan`, `kabupaten_id`) VALUES
 
 CREATE TABLE `mapels` (
   `id` int(11) NOT NULL,
-  `kodemapel` varchar(10) CHARACTER SET latin1 NOT NULL,
-  `mapel` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `kodemapel` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `mapel` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `jurusan_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `status` varchar(20) CHARACTER SET latin1 DEFAULT NULL,
+  `status` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -88995,11 +88995,11 @@ INSERT INTO `mapels` (`id`, `kodemapel`, `mapel`, `jurusan_id`, `status`, `creat
 
 CREATE TABLE `menus` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `order` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `custom_class` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `order` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `custom_class` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -89020,18 +89020,18 @@ INSERT INTO `menus` (`id`, `name`, `slug`, `url`, `order`, `custom_class`, `crea
 CREATE TABLE `menu_items` (
   `id` int(10) UNSIGNED NOT NULL,
   `menu_id` int(11) NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `target` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '_self',
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `target` varchar(255) NOT NULL DEFAULT '_self',
   `parent_id` int(10) UNSIGNED DEFAULT NULL,
-  `order` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `route` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `params` text COLLATE utf8mb4_unicode_ci,
-  `controller` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `middleware` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `custom_class` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `route` varchar(255) DEFAULT NULL,
+  `params` text DEFAULT NULL,
+  `controller` varchar(255) DEFAULT NULL,
+  `middleware` varchar(255) DEFAULT NULL,
+  `icon` varchar(255) DEFAULT NULL,
+  `custom_class` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -89052,9 +89052,9 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `slug`, `url`, `target`, `pa
 CREATE TABLE `menu_settings` (
   `id` int(10) UNSIGNED NOT NULL,
   `menu_id` int(11) DEFAULT NULL,
-  `depth` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '5',
-  `apply_child_as_parent` tinyint(1) NOT NULL DEFAULT '0',
-  `levels` text COLLATE utf8mb4_unicode_ci,
+  `depth` varchar(255) NOT NULL DEFAULT '5',
+  `apply_child_as_parent` tinyint(1) NOT NULL DEFAULT 0,
+  `levels` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -89074,7 +89074,7 @@ INSERT INTO `menu_settings` (`id`, `menu_id`, `depth`, `apply_child_as_parent`, 
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -89100,7 +89100,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (21, '2022_03_11_044108_create_settings_table', 6),
 (22, '2022_03_14_031822_create_pemasukans_table', 7),
 (23, '2022_03_14_060039_create_pemasukan_tingkat_table', 8),
-(24, '2022_03_19_034015_create_pemasukan_santri_table', 9);
+(24, '2022_03_19_034015_create_pemasukan_santri_table', 9),
+(25, '2022_04_02_135721_create_pembayarans_table', 10);
 
 -- --------------------------------------------------------
 
@@ -89110,7 +89111,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `model_has_permissions` (
   `permission_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_type` varchar(255) NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -89122,7 +89123,7 @@ CREATE TABLE `model_has_permissions` (
 
 CREATE TABLE `model_has_roles` (
   `role_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_type` varchar(255) NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -89142,8 +89143,8 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -89155,16 +89156,16 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `pemasukans` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `kode` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `namapemasukan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `deskripsi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kode` varchar(20) NOT NULL,
+  `namapemasukan` varchar(100) NOT NULL,
+  `deskripsi` varchar(255) DEFAULT NULL,
   `nominal` double NOT NULL,
-  `is_pemasukansantri` tinyint(1) NOT NULL DEFAULT '0',
+  `is_pemasukansantri` tinyint(1) NOT NULL DEFAULT 0,
   `tingkat_id` bigint(20) DEFAULT NULL,
   `tahunakademik_id` bigint(20) DEFAULT NULL,
   `tglmulai` date DEFAULT NULL,
   `tglakhir` date DEFAULT NULL,
-  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Non-Aktif',
+  `status` varchar(20) NOT NULL DEFAULT 'Non-Aktif',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -89175,14 +89176,15 @@ CREATE TABLE `pemasukans` (
 --
 
 INSERT INTO `pemasukans` (`id`, `kode`, `namapemasukan`, `deskripsi`, `nominal`, `is_pemasukansantri`, `tingkat_id`, `tahunakademik_id`, `tglmulai`, `tglakhir`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'SPP-7-2021', 'SPP Tingkat 7 2021', NULL, 600000, 1, 1, 3, NULL, NULL, 'Aktif', NULL, '2022-03-13 22:16:21', '2022-03-21 10:23:13'),
+(1, 'SPP-7-2021', 'SPP Tingkat 7 2021', NULL, 600000, 1, 1, 3, NULL, NULL, 'Aktif', NULL, '2022-03-13 22:16:21', '2023-02-22 11:12:39'),
 (2, 'SPP-8-2021', 'SPP Tingkat 8 2021', NULL, 300000, 1, 2, 3, NULL, NULL, 'Aktif', NULL, '2022-03-13 22:48:44', '2022-03-21 09:22:14'),
 (3, 'SPP-9-2021', 'SPP Tingkat 9 2021', NULL, 300000, 1, NULL, 3, NULL, NULL, 'Aktif', NULL, '2022-03-15 19:18:57', '2022-03-21 09:22:22'),
 (4, 'SPP-10-2021', 'SPP Tingkat 10 2021', NULL, 720000, 1, NULL, 3, NULL, NULL, 'Aktif', NULL, '2022-03-15 19:25:26', '2022-03-21 11:25:04'),
 (5, 'PAS-MA-2021', 'Biaya Penilaian Akhir Semester Mu\'allimin 2021', NULL, 200000, 1, NULL, 3, NULL, NULL, 'Aktif', NULL, '2022-03-15 19:28:35', '2022-03-21 22:26:12'),
 (6, 'BOS-MA-2021', 'Bantuan Operasional Sekolah Mu\'allimin Tahun 2021', NULL, 242000000, 0, NULL, 3, NULL, NULL, 'Non-Aktif', NULL, '2022-03-16 18:56:26', '2022-03-21 08:28:37'),
 (7, 'SPP-11-2021', 'SPP Tingkat 11 2021', NULL, 420000, 1, NULL, 3, NULL, NULL, 'Aktif', NULL, '2022-03-18 20:32:16', '2022-03-21 09:22:38'),
-(17, 'SPP-12-2021', 'SPP Tingkat 12 2021', NULL, 420000, 1, NULL, 3, NULL, NULL, 'Aktif', NULL, '2022-03-18 22:30:19', '2022-03-21 09:22:44');
+(17, 'SPP-12-2021', 'SPP Tingkat 12 2021', NULL, 420000, 1, NULL, 3, NULL, NULL, 'Aktif', NULL, '2022-03-18 22:30:19', '2022-03-21 09:22:44'),
+(18, 'SPP-7-2022', 'SPP Tingkat 7 2022', NULL, 600000, 1, NULL, 10, NULL, NULL, 'Aktif', NULL, '2023-02-22 12:24:17', '2023-02-22 12:24:23');
 
 -- --------------------------------------------------------
 
@@ -89194,7 +89196,7 @@ CREATE TABLE `pemasukan_santri` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `pemasukan_id` bigint(20) NOT NULL,
   `santri_id` bigint(20) NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Non-Aktif',
+  `status` varchar(255) NOT NULL DEFAULT 'Non-Aktif',
   `tahunakademik_id` bigint(20) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -89249,7 +89251,14 @@ INSERT INTO `pemasukan_santri` (`id`, `pemasukan_id`, `santri_id`, `status`, `ta
 (307, 5, 2, 'Non-Aktif', 3, NULL, NULL, NULL),
 (308, 5, 6, 'Non-Aktif', 3, NULL, NULL, NULL),
 (309, 5, 8, 'Non-Aktif', 3, NULL, NULL, NULL),
-(310, 5, 11, 'Non-Aktif', 3, NULL, NULL, NULL);
+(310, 5, 11, 'Non-Aktif', 3, NULL, NULL, NULL),
+(311, 18, 1, 'Aktif', 10, NULL, NULL, NULL),
+(312, 18, 4, 'Aktif', 10, NULL, NULL, NULL),
+(313, 18, 7, 'Aktif', 10, NULL, NULL, NULL),
+(314, 18, 10, 'Aktif', 10, NULL, NULL, NULL),
+(315, 18, 12, 'Aktif', 10, NULL, NULL, NULL),
+(316, 18, 13, 'Aktif', 10, NULL, NULL, NULL),
+(317, 18, 20, 'Aktif', 10, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -89261,7 +89270,7 @@ CREATE TABLE `pemasukan_tingkat` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `pemasukan_id` bigint(20) NOT NULL,
   `tingkat_id` bigint(20) NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Non-Aktif',
+  `status` varchar(255) NOT NULL DEFAULT 'Non-Aktif',
   `tahunakademik_id` bigint(20) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -89281,7 +89290,25 @@ INSERT INTO `pemasukan_tingkat` (`id`, `pemasukan_id`, `tingkat_id`, `status`, `
 (137, 4, 4, 'Aktif', 3, NULL, NULL, NULL),
 (180, 5, 4, 'Aktif', 3, NULL, NULL, NULL),
 (181, 5, 5, 'Aktif', 3, NULL, NULL, NULL),
-(182, 5, 6, 'Aktif', 3, NULL, NULL, NULL);
+(182, 5, 6, 'Aktif', 3, NULL, NULL, NULL),
+(183, 18, 1, 'Aktif', 10, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pembayarans`
+--
+
+CREATE TABLE `pembayarans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `kodetransaksi` varchar(255) NOT NULL,
+  `santri_id` bigint(20) NOT NULL,
+  `tgl_transaksi` datetime NOT NULL,
+  `nominal` double NOT NULL,
+  `petugas` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -89291,8 +89318,8 @@ INSERT INTO `pemasukan_tingkat` (`id`, `pemasukan_id`, `tingkat_id`, `status`, `
 
 CREATE TABLE `pendidikans` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `jenjang` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `deskripsi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jenjang` varchar(100) NOT NULL,
+  `deskripsi` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -89317,8 +89344,8 @@ INSERT INTO `pendidikans` (`id`, `jenjang`, `deskripsi`, `created_at`, `updated_
 
 CREATE TABLE `permissions` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -89331,11 +89358,11 @@ CREATE TABLE `permissions` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -89351,8 +89378,8 @@ CREATE TABLE `provinsis` (
   `id` int(11) NOT NULL,
   `namaprovinsi` varchar(255) DEFAULT NULL,
   `locationid` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+  `status` int(11) DEFAULT 1
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data untuk tabel `provinsis`
@@ -89402,8 +89429,8 @@ INSERT INTO `provinsis` (`id`, `namaprovinsi`, `locationid`, `status`) VALUES
 
 CREATE TABLE `roles` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -89437,12 +89464,12 @@ CREATE TABLE `role_has_permissions` (
 
 CREATE TABLE `rombels` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `rombel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rombel` varchar(255) NOT NULL,
   `tingkat_id` bigint(20) DEFAULT NULL,
   `jurusan_id` bigint(20) DEFAULT NULL,
   `tahunakademik_id` bigint(20) DEFAULT NULL,
   `asatidz_id` bigint(20) DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Aktif',
+  `status` varchar(255) NOT NULL DEFAULT 'Aktif',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -89456,7 +89483,8 @@ INSERT INTO `rombels` (`id`, `rombel`, `tingkat_id`, `jurusan_id`, `tahunakademi
 (1, '7-A', 1, 1, 3, 66, 'Aktif', NULL, '2022-03-10 08:26:36', '2022-03-10 08:29:01'),
 (2, '7-B', 1, 1, 3, 77, 'Aktif', NULL, '2022-03-10 08:29:35', '2022-03-10 08:29:35'),
 (3, '8-A', 2, 1, 3, 46, 'Aktif', NULL, '2022-03-13 08:39:21', '2022-03-13 08:40:17'),
-(4, '8-B', 2, 1, 3, 58, 'Aktif', NULL, '2022-03-13 08:40:44', '2022-03-13 08:40:44');
+(4, '8-B', 2, 1, 3, 58, 'Aktif', NULL, '2022-03-13 08:40:44', '2022-03-13 08:40:44'),
+(5, '7-B', 1, 1, 10, 77, 'Aktif', NULL, '2023-02-22 12:22:26', '2023-02-22 12:22:26');
 
 -- --------------------------------------------------------
 
@@ -89468,8 +89496,8 @@ CREATE TABLE `rombel_santri` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `rombel_id` bigint(20) NOT NULL,
   `santri_id` bigint(20) NOT NULL,
-  `status` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tahun` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
+  `tahun` varchar(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -89495,22 +89523,22 @@ INSERT INTO `rombel_santri` (`id`, `rombel_id`, `santri_id`, `status`, `tahun`, 
 
 CREATE TABLE `santris` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nis` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nisn` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nik` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `namalengkap` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tmplahir` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nis` varchar(20) NOT NULL,
+  `nisn` varchar(10) DEFAULT NULL,
+  `nik` varchar(20) DEFAULT NULL,
+  `namalengkap` varchar(100) NOT NULL,
+  `tmplahir` varchar(100) NOT NULL,
   `tgllahir` date NOT NULL,
-  `kelamin` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'L',
-  `alamat` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kelamin` varchar(2) NOT NULL DEFAULT 'L',
+  `alamat` varchar(100) DEFAULT NULL,
   `provinsi_id` bigint(20) UNSIGNED DEFAULT NULL,
   `kabupaten_id` bigint(20) UNSIGNED DEFAULT NULL,
   `kecamatan_id` bigint(20) UNSIGNED DEFAULT NULL,
   `desa_id` bigint(20) UNSIGNED DEFAULT NULL,
   `kategori_santri_id` bigint(20) UNSIGNED DEFAULT NULL,
   `tingkat_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `photo` text COLLATE utf8mb4_unicode_ci,
-  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Aktif',
+  `photo` text DEFAULT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'Aktif',
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -89522,7 +89550,7 @@ CREATE TABLE `santris` (
 --
 
 INSERT INTO `santris` (`id`, `nis`, `nisn`, `nik`, `namalengkap`, `tmplahir`, `tgllahir`, `kelamin`, `alamat`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `desa_id`, `kategori_santri_id`, `tingkat_id`, `photo`, `status`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '0094948345', NULL, NULL, 'AFFAN AL-GHIFARY', 'GARUT', '2009-02-15', 'L', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 'Aktif', NULL, '2022-01-28 20:30:04', '2022-01-28 20:30:04', NULL),
+(1, '0094948345', NULL, NULL, 'AFFAN AL-GHIFARY', 'GARUT', '2009-02-15', 'L', 'Kp. Sukaraja', 12, 173, 2025, 25339, NULL, 1, NULL, 'Aktif', NULL, '2022-01-28 20:30:04', '2023-02-22 12:21:28', NULL),
 (2, '0093396962', NULL, NULL, 'EMRAN FEROZ RIDWANUSSALAM', 'GARUT', '2009-07-05', 'L', NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, 'Aktif', NULL, '2022-01-28 20:30:04', '2022-01-28 20:30:04', NULL),
 (3, '0085242078', NULL, NULL, 'FAUZAN SAHID', 'GARUT', '2008-10-30', 'L', NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, 'Aktif', NULL, '2022-01-28 20:30:04', '2022-01-28 20:30:04', NULL),
 (4, '0094139378', NULL, NULL, 'FAYYADH AHMAD MUDZAKIR', 'GARUT', '2009-04-30', 'L', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 'Aktif', NULL, '2022-01-28 20:30:04', '2022-01-28 20:30:04', NULL),
@@ -89553,10 +89581,10 @@ INSERT INTO `santris` (`id`, `nis`, `nisn`, `nik`, `namalengkap`, `tmplahir`, `t
 
 CREATE TABLE `satuans` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `satuan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `npsn` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nsm` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `logo` text COLLATE utf8mb4_unicode_ci,
+  `satuan` varchar(255) NOT NULL,
+  `npsn` varchar(255) NOT NULL,
+  `nsm` varchar(255) NOT NULL,
+  `logo` text DEFAULT NULL,
   `asatidz_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -89579,12 +89607,12 @@ INSERT INTO `satuans` (`id`, `satuan`, `npsn`, `nsm`, `logo`, `asatidz_id`, `cre
 
 CREATE TABLE `settings` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nama_aplikasi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `site_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mode_sidebar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email_admin` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `teks_footer` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `logo` text COLLATE utf8mb4_unicode_ci,
+  `nama_aplikasi` varchar(255) DEFAULT NULL,
+  `site_title` varchar(255) DEFAULT NULL,
+  `mode_sidebar` varchar(255) DEFAULT NULL,
+  `email_admin` varchar(255) DEFAULT NULL,
+  `teks_footer` varchar(255) DEFAULT NULL,
+  `logo` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -89594,7 +89622,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `nama_aplikasi`, `site_title`, `mode_sidebar`, `email_admin`, `teks_footer`, `logo`, `created_at`, `updated_at`) VALUES
-(1, 'SIASIK-PPI87', 'SIASIK-PPI87 | Sistem Akuntansi dan Akademik Pesantren Persis 87', '1', 'admin@persis87.com', 'Application By PPI-87 Pangatikan', 'logos/sBqgEv68X4wUG7lUjmhKGtQY2ltTYDzSBaoE5B66.png', '2022-03-10 23:49:14', '2022-03-16 18:57:21');
+(1, 'SIASIK-PPI87', 'SIASIK-PPI87 | Sistem Akuntansi dan Akademik Pesantren Persis 87', '0', 'admin@persis87.com', 'Application By PPI-87 Pangatikan', 'logos/sBqgEv68X4wUG7lUjmhKGtQY2ltTYDzSBaoE5B66.png', '2022-03-10 23:49:14', '2023-02-22 12:20:03');
 
 -- --------------------------------------------------------
 
@@ -89604,10 +89632,10 @@ INSERT INTO `settings` (`id`, `nama_aplikasi`, `site_title`, `mode_sidebar`, `em
 
 CREATE TABLE `tahunakademiks` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tahunakademik` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tahunakademik` varchar(100) NOT NULL,
   `tglmulai` date NOT NULL,
   `tglakhir` date NOT NULL,
-  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Aktif',
+  `status` varchar(20) NOT NULL DEFAULT 'Aktif',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -89618,9 +89646,10 @@ CREATE TABLE `tahunakademiks` (
 --
 
 INSERT INTO `tahunakademiks` (`id`, `tahunakademik`, `tglmulai`, `tglakhir`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, '2021-2022', '2021-07-17', '2022-06-30', 'Aktif', '2022-03-08 03:08:26', '2022-03-11 08:40:22', NULL),
+(3, '2021-2022', '2021-07-17', '2022-06-30', 'Non-Aktif', '2022-03-08 03:08:26', '2022-03-11 08:40:22', NULL),
 (6, '2020-2021', '2020-07-17', '2021-06-30', 'Non-Aktif', '2022-03-11 06:19:18', '2022-03-11 08:24:23', NULL),
-(9, '2019-2020', '2019-07-17', '2020-06-30', 'Non-Aktif', '2022-03-11 08:25:25', '2022-03-11 08:25:25', NULL);
+(9, '2019-2020', '2019-07-17', '2020-06-30', 'Non-Aktif', '2022-03-11 08:25:25', '2022-03-11 08:25:25', NULL),
+(10, '2022-2023', '2022-07-18', '2023-06-29', 'Aktif', '2023-02-22 12:20:03', '2023-02-22 12:20:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -89630,7 +89659,7 @@ INSERT INTO `tahunakademiks` (`id`, `tahunakademik`, `tglmulai`, `tglakhir`, `st
 
 CREATE TABLE `tingkats` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tingkat` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tingkat` varchar(100) NOT NULL,
   `satuan_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -89656,11 +89685,11 @@ INSERT INTO `tingkats` (`id`, `tingkat`, `satuan_id`, `created_at`, `updated_at`
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -89670,7 +89699,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Hamdan Fauzi S. Kom', 'dans.azie@gmail.com', NULL, '$2y$10$vH/8iNleLsNSPykjGolYEOM5Mlz8trE7STOzha.jngI0KxAfCzvJ.', NULL, '2022-02-22 05:14:01', '2022-03-10 07:32:08'),
+(1, 'Hamdan Fauzi S. Kom', 'dans.azie@gmail.com', NULL, '$2y$10$zGebEN/JkXuOAisuVps2MOU9zfSf3.skePlwYEq6TgPCAqEMY6FWK', NULL, '2022-02-22 05:14:01', '2023-02-22 11:06:05'),
 (3, 'Alda Nurfadilah S.Pd', 'saha@saha.weh', NULL, '$2y$10$KUnWaO/6rtiGQ8V6vzCFv.x.tLyI5JMLJHThiQxiMD89oAnEq4Zba', NULL, '2022-03-07 00:46:55', '2022-03-21 22:32:02'),
 (5, 'Khoerudin Firmansyah S.Pd.I', 'ppidelapantujuh@gmail.com', NULL, '$2y$10$YiFwj6ZlC6iHeejupp8UJuRpl0YTQwPXBf55RJeCZEzZKjXj5bAXm', NULL, '2022-03-12 00:12:01', '2022-03-13 11:03:52');
 
@@ -89789,6 +89818,12 @@ ALTER TABLE `pemasukan_santri`
 -- Indeks untuk tabel `pemasukan_tingkat`
 --
 ALTER TABLE `pemasukan_tingkat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `pembayarans`
+--
+ALTER TABLE `pembayarans`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -89958,25 +89993,31 @@ ALTER TABLE `menu_settings`
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemasukans`
 --
 ALTER TABLE `pemasukans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemasukan_santri`
 --
 ALTER TABLE `pemasukan_santri`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=311;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=318;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemasukan_tingkat`
 --
 ALTER TABLE `pemasukan_tingkat`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+
+--
+-- AUTO_INCREMENT untuk tabel `pembayarans`
+--
+ALTER TABLE `pembayarans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `pendidikans`
@@ -90012,7 +90053,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT untuk tabel `rombels`
 --
 ALTER TABLE `rombels`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `rombel_santri`
@@ -90042,7 +90083,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT untuk tabel `tahunakademiks`
 --
 ALTER TABLE `tahunakademiks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `tingkats`
