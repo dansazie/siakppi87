@@ -27,6 +27,7 @@
                         <li class=""><a class="nav-link" href="layout-default.html">Set JTM</a></li>
                         <li class=""><a class="nav-link" href="layout-default.html">Buat Jadwal</a></li>
                         <li class=""><a class="nav-link" href="layout-default.html">Jadwal Pelajaran</a></li>
+                        <li class=""><a class="nav-link" href="layout-default.html">Kenaikan Kelas</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown {{ (request()->is('keuangan*')) ? 'active' : ''}}">

@@ -69,7 +69,7 @@ class Santri extends Model
     }
 
     public function pemasukans(){
-        return $this->belongsToMany(Pemasukan::class)->withPivot('status','tahunakademik_id')->where('pemasukans.status','Aktif');
+        return $this->belongsToMany(Pemasukan::class)->withPivot('status','tahunakademik_id')->where('pemasukan_santri.status','Aktif');
     }
 
     public function pembayarans(){

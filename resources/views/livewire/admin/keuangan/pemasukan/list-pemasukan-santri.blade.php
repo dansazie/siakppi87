@@ -1,6 +1,6 @@
 
 <div>
-    <x-loading-indicator></x-loading-indicator>
+    
         <section class="section">
             <div class="section-header">
                 <h1>{{ __('Pemasukan Santri') }}</h1>
